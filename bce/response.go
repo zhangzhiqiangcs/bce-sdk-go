@@ -19,6 +19,7 @@ package bce
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"strings"
@@ -97,7 +98,7 @@ func (r *BceResponse) ParseResponse() {
 			if err := jsonDecoder.Decode(r.serviceError); err != nil {
 				r.serviceError = NewBceServiceError(
 					EMALFORMED_JSON,
-					"Service json error message decode failed",
+					fmt.Sprintf("Service json error message decode failed: %s, statusCode %v, rawBody: %s", err.Error(), r.response.StatusCode(), string(rawBody)),
 					r.requestId,
 					r.statusCode)
 			}

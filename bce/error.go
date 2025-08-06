@@ -16,6 +16,8 @@
 
 package bce
 
+import "fmt"
+
 const (
 	EACCESS_DENIED            = "AccessDenied"
 	EINAPPROPRIATE_JSON       = "InappropriateJSON"
@@ -60,5 +62,6 @@ func (b *BceServiceError) Error() string {
 }
 
 func NewBceServiceError(code, msg, reqId string, status int) *BceServiceError {
+	fmt.Printf("NewBceServiceError: code=%s, msg=%s, reqId=%s, status=%d\n", code, msg, reqId, status)
 	return &BceServiceError{code, msg, reqId, status}
 }
